@@ -1,9 +1,13 @@
-# Userテーブル
+# フレームワークバージョン
+- Rails 5.2.4.3
+
+# テーブル各種
+## Userテーブル
 - name :string
 - email :string
 - password_digest :string
 
-# Taskテーブル
+## Taskテーブル
 - name :string
 - content :text
 - priority :integer
@@ -11,10 +15,10 @@
 - end_at :datetime
 - user_id :bigint
 
-# Labelテーブル
+## Labelテーブル
 - name :string
 
-# Laberingテーブル
+## Laberingテーブル
 - task_id :bigint
 - label_id :bigint
 
