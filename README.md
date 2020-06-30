@@ -1,3 +1,7 @@
+# フレームワークバージョン
+- Rails 5.2.4.3
+
+# テーブル各種
 ## Userテーブル
 - name :string
 - email :string

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
     name { 'task' }
-    content { 'task' }
+    content { 'Factoryで作ったデフォルトのコンテント１' }
   end
 end
