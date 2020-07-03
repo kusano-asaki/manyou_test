@@ -4,7 +4,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    # @tasks = Task.all.order(created_at: "DESC")
+    # @tasks = Task.all.order(params[:sort])
+    if params[:sort_expired]
+      @tasks = Task.all.order(end_at: "DESC")
+    else
+      @tasks = Task.all.order(created_at: "DESC")
+    end
   end
 
   # GET /tasks/1

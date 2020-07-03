@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
     FactoryBot.create(:task)
-    FactoryBot.create(:task, name: 'task2')
+    FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03')
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -20,6 +20,16 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+  context 'タスクを終了期日でソートした場合' do
+    it 'タスクが終了期日の降順で並んでいる' do
+      visit tasks_path
+      click_on '終了期限でソートする'
+      task_list = all('.task_row')
+      expect(page).to have_content '2020-08-03'
+      expect(page).to have_content '2020-07-03'
+    end
+  end
+
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存される' do
