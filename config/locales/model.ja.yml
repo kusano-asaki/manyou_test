@@ -7,3 +7,4 @@ ja:
         name: タイトル
         content: 内容
         end_at: 終了期日
+        completed: 着手状況
