@@ -10,10 +10,20 @@ class TasksController < ApplicationController
     if params[:sort_expired]
       @tasks = Task.all.order(end_at: "DESC")
     end
-
     #優先順位でソート
-    if params[:sort_completed]
-      @tasks = Task.all.order(completed: "DESC")
+    # if params[:sort_completed]
+    #   @tasks = Task.all.order(completed: "DESC")
+    # end
+    #NAMEおよび進捗状況で検索
+    if params[:search].present?
+      if params[:name].present? && params[:completed].present?
+        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%")
+        @tasks = @tasks.where(completed: params[:completed])
+      elsif params[:name].present?
+        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%")
+      elsif params[:completed].present?
+        @tasks = @tasks.where(completed: params[:completed])
+      end
     end
   end
 
