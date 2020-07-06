@@ -4,12 +4,16 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    # @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(created_at: "DESC")
     # @tasks = Task.all.order(params[:sort])
+    #終了期限でのソート
     if params[:sort_expired]
       @tasks = Task.all.order(end_at: "DESC")
-    else
-      @tasks = Task.all.order(created_at: "DESC")
+    end
+
+    #優先順位でソート
+    if params[:sort_completed]
+      @tasks = Task.all.order(completed: "DESC")
     end
   end
 
