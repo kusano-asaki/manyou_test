@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
     FactoryBot.create(:task)
-    FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '0')
+    FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '0', priority: '高')
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -30,7 +30,16 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(task_list[1]).to have_content 'task2'
     end
   end
-
+  context 'タスクを優先順位でソートした場合' do
+    it 'タスクが優先順位の高い順で並んでいる' do
+      visit tasks_path
+      click_on '優先順位でソートする'
+      expect(page).to have_content 'Tasks'
+      task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+      expect(task_list[0]).to have_content 'task2'
+      expect(task_list[1]).to have_content 'task'
+    end
+  end
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存される' do
