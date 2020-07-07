@@ -29,7 +29,9 @@
   </thead>
 
   <tbody>
+
     <% @tasks.each do |task| %>
+
       <tr>
         <td class="task_row"><%= task.name %></td>
         <td><%= task.content %></td>
@@ -47,3 +49,5 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+
+<%= paginate @tasks %>

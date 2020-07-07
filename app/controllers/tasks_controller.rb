@@ -4,25 +4,25 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(5)
     # @tasks = Task.all.order(params[:sort])
     #終了期限でのソート
     if params[:sort_expired]
-      @tasks = Task.all.order(end_at: "DESC")
+      @tasks = Task.all.order(end_at: "DESC").page(params[:page]).per(5)
     end
     #優先順位でソート
     if params[:sort_priority]
-      @tasks = Task.all.order(priority: "DESC")
+      @tasks = Task.all.order(priority: "DESC").page(params[:page]).per(5)
     end
     #NAMEおよび進捗状況で検索
     if params[:search].present?
       if params[:name].present? && params[:completed].present?
-        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%")
-        @tasks = @tasks.where(completed: params[:completed])
+        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
+        @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
       elsif params[:name].present?
-        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%")
+        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
       elsif params[:completed].present?
-        @tasks = @tasks.where(completed: params[:completed])
+        @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
       end
     end
   end
