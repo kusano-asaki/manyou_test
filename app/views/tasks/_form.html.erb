@@ -12,28 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "field_text" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
-
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.label :content, class: "field_text" %>
+    <%= form.text_area :content, class: "form-control" %>
   </div>
-
   <div class="field">
-    <%= form.label :end_at %>
+    <%= form.label :end_at, class: "field_text" %>
     <%= form.date_field :end_at %>
   </div>
-
   <div class="field">
-    <%= form.label :completed %>
+    <%= form.label :completed, class: "field_text" %>
     <%= form.select :completed,
     [['未着手',0],['着手中',1],['完了',2]], include_blank: '選択してください' %>
   </div>
-
   <div class="field">
-    <%= form.label :priority %>
+    <%= form.label :priority, class: "field_text" %>
     <%= form.select :priority, Task.priorities.keys.to_a, include_blank: '選択してください' %>
   </div>
 
