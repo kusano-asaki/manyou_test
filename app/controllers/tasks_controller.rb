@@ -11,9 +11,9 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(end_at: "DESC")
     end
     #優先順位でソート
-    # if params[:sort_completed]
-    #   @tasks = Task.all.order(completed: "DESC")
-    # end
+    if params[:sort_priority]
+      @tasks = Task.all.order(priority: "DESC")
+    end
     #NAMEおよび進捗状況で検索
     if params[:search].present?
       if params[:name].present? && params[:completed].present?
@@ -89,6 +89,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :content, :end_at, :completed)
+      params.require(:task).permit(:name, :content, :end_at, :completed, :priority)
     end
 end

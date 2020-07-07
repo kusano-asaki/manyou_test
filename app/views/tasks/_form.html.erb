@@ -32,6 +32,11 @@
     [['未着手',0],['着手中',1],['完了',2]], include_blank: '選択してください' %>
   </div>
 
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities.keys.to_a, include_blank: '選択してください' %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
