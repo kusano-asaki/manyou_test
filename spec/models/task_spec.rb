@@ -13,7 +13,17 @@ RSpec.describe 'タスク管理機能', type: :model do
     expect(task).to be_valid
   end
 end
-
-# RSpec.describe Task, type: :model do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
+describe 'scopeメソッドで検索をした場合' do
+  before do
+    FactoryBot.create(:task)
+    FactoryBot.create(:task, name: 'bbbb', end_at: '2020-08-03', completed: '0')
+    end
+  it "scopeメソッドでタイトル検索ができる" do
+    expect(Task.name_like('task').count).to eq 1
+  end
+  it "scopeメソッドでステータス検索ができる" do
+    expect(Task.completed_like('0').count).to eq 1  end
+  it "scopeメソッドでタイトルとステータスの両方が検索できる" do
+    expect(Task.name_like('bbbb').completed_like('0').count).to eq 1
+  end
+end

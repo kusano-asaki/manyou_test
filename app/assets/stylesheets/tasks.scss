@@ -1,3 +1,51 @@
 // Place all the styles related to the Tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+a {
+  color: #000;
+}
+
+a .btn btn-primary {
+  color: #fff;
+}
+//index
+.serch_form {
+  width: 30%;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  background: white;
+  border-left: solid 5px #7db4e6;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.serch_btn {
+  margin-bottom: 10px;
+}
+.page {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+}
+
+.form_list {
+  text-align: center;
+
+}
+//new
+.font_sample {
+  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: #f4f4f4;/*背景色*/
+  border-left: solid 5px #7db4e6;/*左線*/
+  border-bottom: solid 3px #d7d7d7;/*下線*/
+}
+.field_text {
+  font-size: large;
+  margin-top: 20px;
+}
+
+.actions {
+  margin-top: 50px;
+}

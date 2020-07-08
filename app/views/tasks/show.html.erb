@@ -1,14 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @task.content %>
-</p>
+<ul class="list-group">
+  <li class="list-group-item">
+    <strong>Name:</strong>
+    <%= @task.name %>
+  </li>
+  <li class="list-group-item">
+    <strong>Content:</strong>
+    <%= @task.content %>
+  </li>
+  <li class="list-group-item">
+    <strong>End_at:</strong>
+    <%= @task.end_at %>
+  </li>
+  <li class="list-group-item">
+    <strong>Completed:</strong>
+    <%= @task.completed %>
+  </li>
+  <li class="list-group-item">
+    <strong>Priority:</strong>
+    <%= @task.priority %></li>
+</ul>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
