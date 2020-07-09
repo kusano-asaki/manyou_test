@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    if logged_in?
+      redirect_to user_path(current_user.id)
+      flash[:notice] = 'ユーザー登録済みです'
+    else
+      @user = User.new
+    end
   end
 
   def create
