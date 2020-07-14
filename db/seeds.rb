@@ -10,5 +10,6 @@ User.create!(
   name:'test_task',
   email:'task@ttt.com',
   password:'123456789',
-  password_confirmation:'123456789'
+  password_confirmation:'123456789',
+  admin: true
 )
