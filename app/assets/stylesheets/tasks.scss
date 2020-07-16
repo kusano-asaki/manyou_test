@@ -9,6 +9,18 @@ a {
 a .btn btn-primary {
   color: #fff;
 }
+
+//nav
+.nav li {
+ font-weight: bold;
+ float: left;
+ font-size: 20px;
+ padding: 10px 5px 10px 5px;
+}
+.nav ul {
+  margin: 0;
+}
+
 //index
 .serch_form {
   width: 30%;

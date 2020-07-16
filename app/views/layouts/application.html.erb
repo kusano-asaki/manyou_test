@@ -10,17 +10,18 @@
   </head>
 
   <header>
-    <nav class="navbar  navbar-default" style="background-color: #7db4e6;">
-      <div class="container-fluid">
-
+    <nav class="navbar" style="background-color: #7db4e6;">
           <% if logged_in? %>
-            <%= link_to "Profile", user_path(current_user.id) %>
-            <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-          <% else %>
-            <%= link_to "Sign up", new_user_path %>
-            <%= link_to "Login", new_session_path %>
+          <ul class="nav">
+            <li class="nav-item"><%= link_to "Profile", user_path(current_user.id) %></li>
+            <li class="nav-item"><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
+          </ul>
+            <% else %>
+          <ul class="nav nav-tabs">
+            <li class="nav-item"><%= link_to "Sign up", new_user_path %></li>
+            <li class="nav-item"><%= link_to "Login", new_session_path %></li>
+          </ul>
           <% end %>
-      </div>
     </nav>
   </header>
 
