@@ -22,6 +22,7 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'dotenv-rails'
+  gem 'database_cleaner'
 end
 
 group :development do

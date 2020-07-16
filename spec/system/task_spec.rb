@@ -1,8 +1,15 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '0', priority: '高')
+    @user = FactoryBot.create(:user)
+    # FactoryBot.create(:task, user: user)
+    # FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '0', priority: '高')
+    visit new_session_path
+    fill_in 'session[email]', with: 'sss@sss.com'
+    fill_in 'session[password]', with: '123456789'
+    click_on 'Log in'
+    @task　=  FactoryBot.create(:task, user: @user)
+    @second_task = FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '未着手', priority: '高', user: @user)
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -55,7 +62,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'タスク詳細画面' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示されたページに遷移する' do
-         test3 = FactoryBot.create(:task, name: 'test3_title', content: 'test3_content')
+         test3 = FactoryBot.create(:task, name: 'test3_title', content: 'test3_content', user: @user)
          visit task_path(test3)
          expect(page).to have_content 'test3_title'
        end

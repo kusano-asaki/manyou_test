@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :if_not_admin, only: [:index, :new, :show, :create, :edit, :update, :destroy]
 
   def index
-    @users = User.all.includes(:tasks).order(id: "ASC")
+    @users = User.all.includes(:tasks).order(created_at:'DESC') #.order(id: "ASC")
   end
 
   def new
@@ -38,6 +38,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to admin_users_path
+    flash[:notice] = 'User情報を削除しました'
   end
 
   private
