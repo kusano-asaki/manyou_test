@@ -17,7 +17,7 @@
             <li class="nav-item"><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
           </ul>
             <% else %>
-          <ul class="nav nav-tabs">
+          <ul class="nav">
             <li class="nav-item"><%= link_to "Sign up", new_user_path %></li>
             <li class="nav-item"><%= link_to "Login", new_session_path %></li>
           </ul>
