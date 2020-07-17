@@ -25,8 +25,7 @@
   </div>
   <div class="field">
     <%= form.label :completed, class: "field_text" %>
-    <%= form.select :completed,
-    [['未着手',0],['着手中',1],['完了',2]], include_blank: '選択してください' %>
+    <%= form.select :completed, Task.completeds.keys.to_a, include_blank: '選択してください' %>
   </div>
   <div class="field">
     <%= form.label :priority, class: "field_text" %>

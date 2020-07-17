@@ -1,6 +1,9 @@
-<p id="notice"><%= notice %></p>
-
 <ul class="list-group">
+  <li class="list-group-item">
+    <strong>User_Name:</strong>
+    <%= @task.user.name %>
+  </li>
+
   <li class="list-group-item">
     <strong>Name:</strong>
     <%= @task.name %>
@@ -19,7 +22,8 @@
   </li>
   <li class="list-group-item">
     <strong>Priority:</strong>
-    <%= @task.priority %></li>
+    <%= @task.priority %>
+  </li>
 </ul>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

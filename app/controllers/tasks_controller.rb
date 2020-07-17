@@ -4,26 +4,31 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(5)
+    if logged_in?
+    @tasks = current_user.tasks.all.order(created_at: "DESC").page(params[:page]).per(5)
     # @tasks = Task.all.order(params[:sort])
     #終了期限でのソート
     if params[:sort_expired]
-      @tasks = Task.all.order(end_at: "DESC").page(params[:page]).per(5)
+      @tasks = current_user.tasks.all.order(end_at: "DESC").page(params[:page]).per(5)
     end
     #優先順位でソート
     if params[:sort_priority]
-      @tasks = Task.all.order(priority: "DESC").page(params[:page]).per(5)
+      @tasks = current_user.tasks.all.order(priority: "DESC").page(params[:page]).per(5)
     end
     #NAMEおよび進捗状況で検索
     if params[:search].present?
       if params[:name].present? && params[:completed].present?
-        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
+        @tasks = current_user.tasks.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
         @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
       elsif params[:name].present?
-        @tasks = Task.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
+        @tasks = current_user.tasks.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
       elsif params[:completed].present?
         @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
       end
+    end
+    else
+      redirect_to new_session_path
+      flash[:notice] = 'ログインをしてください'
     end
   end
 
@@ -44,8 +49,9 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
+    @task = current_user.tasks.build(task_params)
+    # @task = Task.new(task_params)
+    # @task.user_id = current_user.id
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }

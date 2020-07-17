@@ -1,0 +1,4 @@
+<h3><%= @user.name %>のページ</h3>
+<p>メールアドレス: <%= @user.email %></p>
+
+<%= link_to "task一覧へ", tasks_path(@user.id), class: "btn btn-primary" %>

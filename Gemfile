@@ -22,6 +22,7 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'dotenv-rails'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -41,3 +42,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'bcrypt', '3.1.11'

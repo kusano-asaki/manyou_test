@@ -1,0 +1,32 @@
+<h3>※注意　管理者画面 ユーザー一覧</h3>
+<div class="container">
+  <table class="user_info">
+    <thead>
+      <tr>
+        <th>User_ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Task_Count</th>
+        <th>Admin</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id  %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email  %></td>
+        <td><%= user.tasks.count %></td>
+        <td><%= user.admin %></td>
+        <td><%= link_to 'Show', admin_user_path(user)  %></td>
+        <td><%= link_to 'Edit', edit_admin_user_path(user)  %></td>
+        <td id='destroy_<%= user.name%>'><%= link_to 'Destroy', admin_user_path(user),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<%= link_to 'New User', new_admin_user_path, class: "btn btn-primary" %>
