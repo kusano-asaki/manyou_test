@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :if_not_admin, only: [:index, :new, :show, :create, :edit, :update, :destroy]
+  before_action :if_not_admin, only: [:index, :new, :show, :create, :edit, :update, :detroy]
 
   def index
     @users = User.all.includes(:tasks).order(created_at:'DESC') #.order(id: "ASC")
@@ -51,11 +51,10 @@ class Admin::UsersController < ApplicationController
     end
 
     def if_not_admin
-      unless current_user.admin?
-        flash[:notice] = 'あなたは管理者ではありません'
-        redirect_to root_path
-      else
+      if logged_in?
+      redirect_to root_path, notice:'あなたは管理者ではありません'  unless current_user.admin?
+        else
+          redirect_to new_session_path
       end
     end
-
 end
