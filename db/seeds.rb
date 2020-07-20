@@ -13,3 +13,19 @@ User.create!(
   password_confirmation:'123456789',
   admin: true
 )
+
+Label.create!(
+  name: 'プライベート'
+)
+
+Label.create!(
+  name: '仕事'
+)
+
+Label.create!(
+  name: '外出'
+)
+
+Label.create!(
+  name: '家事'
+)

@@ -5,12 +5,14 @@
   <%= form_with(method: :get,url: tasks_path, local: true) do |form| %>
     <%= form.label :name_serch, "NAME検索" %>
     <%= form.text_field :name %>
-    <%= form.label :completed_serch, "進捗検索" %>
     <div class="serch_btn">
+      <%= form.label :completed_serch, "進捗検索" %>
       <%= form.select :completed, [[],['未着手',0],['着手中',1],['完了',2]] %>
       <%= form.hidden_field :search, value: 'true' %><br>
+      <%= form.label :label_serch, "ラベル検索" %>
+      <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
     </div>
-      <%= form.submit "絞り込み検索" %>
+    <%= form.submit "絞り込み検索" %>
   <% end %>
 </div>
 <nav aria-label="breadcrumb">
@@ -33,6 +35,7 @@
       <th>End_at</th>
       <th class="title">Completed</th>
       <th class="title">Priority</th>
+      <th class="title">Label</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -47,6 +50,11 @@
         <td><%= task.end_at %></td>
         <td class="title"><%= task.completed %></td>
         <td class="title"><%= task.priority %></td>
+        <td>
+          <% task.labels.each do |label| %>
+            <%= label.name %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', task , class: "btn btn-info" %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info" %></td>
@@ -55,7 +63,6 @@
   </tbody>
 </table>
 </div>
-
 
 <%= link_to 'New Task', new_task_path, class: "btn btn-primary" %><br>
 <div class="page">

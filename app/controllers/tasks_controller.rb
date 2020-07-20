@@ -50,6 +50,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.build(task_params)
+    # binding.pry
     # @task = Task.new(task_params)
     # @task.user_id = current_user.id
     respond_to do |format|
@@ -95,6 +96,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :content, :end_at, :completed, :priority)
+      params.require(:task).permit(:name, :content, :end_at, :completed, :priority, label_ids: [])
     end
 end
