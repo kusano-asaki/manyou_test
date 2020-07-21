@@ -10,7 +10,7 @@
       <%= form.select :completed, [[],['未着手',0],['着手中',1],['完了',2]] %>
       <%= form.hidden_field :search, value: 'true' %><br>
       <%= form.label :label_serch, "ラベル検索" %>
-      <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
+      <%= form.select("label_id", Label.all.pluck(:name, :id), { include_blank: true }) %>
     </div>
     <%= form.submit "絞り込み検索" %>
   <% end %>

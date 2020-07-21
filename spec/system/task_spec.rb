@@ -2,15 +2,15 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
-    # FactoryBot.create(:task, user: user)
-    # FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '0', priority: '高')
+      # FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '0', priority: '高')
     visit new_session_path
     fill_in 'session[email]', with: 'sss@sss.com'
     fill_in 'session[password]', with: '123456789'
     click_on 'Log in'
-    @task　=  FactoryBot.create(:task, user: @user)
+    @task　= FactoryBot.create(:task, user: @user)
     @second_task = FactoryBot.create(:task, name: 'task2', end_at: '2020-08-03', completed: '未着手', priority: '高', user: @user)
   end
+
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
@@ -77,14 +77,17 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     it 'ステータスで検索できる' do
       visit tasks_path
-      find("option[value='1']").select_option
+      # find("option[value='1']").select_option
+      select '着手中', from: 'completed'
       click_button 'commit'
       expect(page).to have_content 'task'
     end
     it 'タイトルとステータスで検索できる' do
       visit tasks_path
       fill_in "name", with: 'task2'
-      find("option[value='0']").select_option
+      # find("option[value='0']").select_option
+      select '未着手', from: 'completed'
+      click_button 'commit'
       expect(page).to have_content 'task'
     end
   end
