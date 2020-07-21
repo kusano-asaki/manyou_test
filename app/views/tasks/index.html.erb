@@ -52,7 +52,7 @@
         <td class="title"><%= task.priority %></td>
         <td>
           <% task.labels.each do |label| %>
-            <%= label.name %>
+            <%= label.name %><br>
           <% end %>
         </td>
         <td><%= link_to 'Show', task , class: "btn btn-info" %></td>
