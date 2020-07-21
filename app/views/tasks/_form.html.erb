@@ -36,7 +36,7 @@
     <%= form.label :label, class: "field_text" %>
     <% Label.all.each do |label| %>
       <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id]%>
-      <label class='badge badge-secondary'><%= label.name %></label>
+      <label class='badge label_form'><%= label.name %></label>
     <% end %>
 
   </div>
