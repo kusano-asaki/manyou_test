@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if logged_in?
+      # binding.pry
     @tasks = current_user.tasks.all.order(created_at: "DESC").page(params[:page]).per(5)
     # @tasks = Task.all.order(params[:sort])
     #終了期限でのソート
@@ -17,13 +18,29 @@ class TasksController < ApplicationController
     end
     #NAMEおよび進捗状況で検索
     if params[:search].present?
-      if params[:name].present? && params[:completed].present?
+      if params[:name].present? && params[:completed].present? && params[:label_id].present?
         @tasks = current_user.tasks.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
         @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
+        @labelling = Labelling.where(label_id: params[:label_id]).pluck(:task_id)
+        @tasks = @tasks.where(id: @labelling)
+      elsif params[:name].present? && params[:completed].present?
+        @tasks = current_user.tasks.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
+        @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
+      elsif params[:name].present? && params[:label_id].present?
+        @tasks = current_user.tasks.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
+        @labelling = Labelling.where(label_id: params[:label_id]).pluck(:task_id)
+        @tasks = @tasks.where(id: @labelling)
+      elsif params[:completed].present? && params[:label_id].present?
+        @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
+        @labelling = Labelling.where(label_id: params[:label_id]).pluck(:task_id)
+        @tasks = @tasks.where(id: @labelling)
       elsif params[:name].present?
         @tasks = current_user.tasks.where("name LIKE ?", "%#{ params[:name] }%").page(params[:page]).per(5)
       elsif params[:completed].present?
         @tasks = @tasks.where(completed: params[:completed]).page(params[:page]).per(5)
+      elsif params[:label_id].present?
+        @labelling = Labelling.where(label_id: params[:label_id]).pluck(:task_id)
+        @tasks = @tasks.where(id: @labelling)
       end
     end
     else
@@ -50,6 +67,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.build(task_params)
+    # binding.pry
     # @task = Task.new(task_params)
     # @task.user_id = current_user.id
     respond_to do |format|
@@ -95,6 +113,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :content, :end_at, :completed, :priority)
+      params.require(:task).permit(:name, :content, :end_at, :completed, :priority, label_ids: [])
     end
 end

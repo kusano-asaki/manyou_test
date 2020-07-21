@@ -24,6 +24,12 @@
     <strong>Priority:</strong>
     <%= @task.priority %>
   </li>
+  <li class="list-group-item">
+    <strong>Label:</strong>
+    <% @task.labels.each do |label| %>
+      <%= label.name %>
+    <% end %>
+  </li>
 </ul>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

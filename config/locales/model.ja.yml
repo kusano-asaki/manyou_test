@@ -10,6 +10,7 @@ ja:
         end_at: 終了期日
         completed: 着手状況
         priority: 優先度
+        label: ラベル
       user:
         name: 名前
         email: メールアドレス
